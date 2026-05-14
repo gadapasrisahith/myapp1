@@ -98,5 +98,8 @@ elif page_choice == "Demand Forecast":
     
     if st.button("Predict Next Week"):
         prediction = ai_model.get_demand_prediction(product_name)
-        st.success(f"Predicted Demand for {product_name}:")
-        st.subheader(f"{prediction} units")
+        if isinstance(prediction, str) and prediction.startswith("Error:"):
+            st.error(prediction)
+        else:
+            st.success(f"Predicted Demand for {product_name}:")
+            st.subheader(f"{prediction} units")
